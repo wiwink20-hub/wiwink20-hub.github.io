@@ -35,44 +35,78 @@ const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const products = [
-    // Serum Category - 10 items
+    // Serum Category - 5 items
     { id: 1, name: "Radiance Serum", price: 68.0, image: productSerum, category: "Serum" },
     { id: 2, name: "Vitamin C Serum", price: 72.0, image: productSerum, category: "Serum" },
-    { id: 3, name: "Vitamin E Serum", price: 65.0, image: productSerumVitaminE, category: "Serum" },
-    { id: 4, name: "Retinol Serum", price: 78.0, image: productSerumRetinol, category: "Serum" },
+    { id: 3, name: "Retinol Serum", price: 78.0, image: productSerumRetinol, category: "Serum" },
+    { id: 4, name: "Hyaluronic Acid Serum", price: 70.0, image: productSerumHyaluronic, category: "Serum" },
     { id: 5, name: "Niacinamide Serum", price: 62.0, image: productSerumNiacinamide, category: "Serum" },
-    { id: 6, name: "Hyaluronic Acid Serum", price: 70.0, image: productSerumHyaluronic, category: "Serum" },
-    { id: 7, name: "Peptide Serum", price: 82.0, image: productSerumPeptide, category: "Serum" },
-    { id: 8, name: "Collagen Serum", price: 75.0, image: productSerumCollagen, category: "Serum" },
-    { id: 9, name: "Brightening Serum", price: 68.0, image: productSerumBrightening, category: "Serum" },
-    { id: 10, name: "Anti-Aging Serum", price: 85.0, image: productSerumAntiaging, category: "Serum" },
     
-    // Moisturizer Category - 10 items
-    { id: 11, name: "Hydrating Cream", price: 52.0, image: productCream, category: "Moisturizer" },
-    { id: 12, name: "Night Cream", price: 58.0, image: productCream, category: "Moisturizer" },
-    { id: 13, name: "Day Cream", price: 54.0, image: productCreamDay, category: "Moisturizer" },
-    { id: 14, name: "Eye Cream", price: 48.0, image: productCreamEye, category: "Moisturizer" },
-    { id: 15, name: "Anti-Wrinkle Cream", price: 64.0, image: productCreamAntiwrinkle, category: "Moisturizer" },
-    { id: 16, name: "Firming Cream", price: 62.0, image: productCreamFirming, category: "Moisturizer" },
-    { id: 17, name: "Moisturizing Cream", price: 55.0, image: productCreamMoisturizing, category: "Moisturizer" },
-    { id: 18, name: "Nourishing Cream", price: 60.0, image: productCreamNourishing, category: "Moisturizer" },
-    { id: 19, name: "Recovery Cream", price: 68.0, image: productCreamRecovery, category: "Moisturizer" },
-    { id: 20, name: "Soothing Cream", price: 56.0, image: productCreamSoothing, category: "Moisturizer" },
+    // Moisturizer Category - 5 items
+    { id: 6, name: "Hydrating Cream", price: 52.0, image: productCream, category: "Moisturizer" },
+    { id: 7, name: "Night Cream", price: 58.0, image: productCream, category: "Moisturizer" },
+    { id: 8, name: "Day Cream", price: 54.0, image: productCreamDay, category: "Moisturizer" },
+    { id: 9, name: "Anti-Wrinkle Cream", price: 64.0, image: productCreamAntiwrinkle, category: "Moisturizer" },
+    { id: 10, name: "Firming Cream", price: 62.0, image: productCreamFirming, category: "Moisturizer" },
     
-    // Cleanser Category - 10 items
-    { id: 21, name: "Gentle Cleanser", price: 38.0, image: productCleanser, category: "Cleanser" },
-    { id: 22, name: "Foaming Cleanser", price: 42.0, image: productCleanser, category: "Cleanser" },
-    { id: 23, name: "Micellar Water", price: 36.0, image: productCleanserMicellar, category: "Cleanser" },
-    { id: 24, name: "Gel Cleanser", price: 40.0, image: productCleanserGel, category: "Cleanser" },
-    { id: 25, name: "Oil Cleanser", price: 45.0, image: productCleanserOil, category: "Cleanser" },
-    { id: 26, name: "Exfoliating Cleanser", price: 44.0, image: productCleanserExfoliating, category: "Cleanser" },
-    { id: 27, name: "Purifying Cleanser", price: 41.0, image: productCleanserPurifying, category: "Cleanser" },
-    { id: 28, name: "Cream Cleanser", price: 43.0, image: productCleanserCream, category: "Cleanser" },
-    { id: 29, name: "Balm Cleanser", price: 46.0, image: productCleanserBalm, category: "Cleanser" },
-    { id: 30, name: "Mousse Cleanser", price: 39.0, image: productCleanserMousse, category: "Cleanser" },
+    // Cleanser Category - 5 items
+    { id: 11, name: "Gentle Cleanser", price: 38.0, image: productCleanser, category: "Cleanser" },
+    { id: 12, name: "Foaming Cleanser", price: 42.0, image: productCleanser, category: "Cleanser" },
+    { id: 13, name: "Micellar Water", price: 36.0, image: productCleanserMicellar, category: "Cleanser" },
+    { id: 14, name: "Gel Cleanser", price: 40.0, image: productCleanserGel, category: "Cleanser" },
+    { id: 15, name: "Oil Cleanser", price: 45.0, image: productCleanserOil, category: "Cleanser" },
+    
+    // Toner Category - 5 items
+    { id: 16, name: "Hydrating Toner", price: 34.0, image: productSerum, category: "Toner" },
+    { id: 17, name: "Balancing Toner", price: 36.0, image: productSerumVitaminE, category: "Toner" },
+    { id: 18, name: "Exfoliating Toner", price: 38.0, image: productSerumPeptide, category: "Toner" },
+    { id: 19, name: "Soothing Toner", price: 32.0, image: productSerumCollagen, category: "Toner" },
+    { id: 20, name: "Brightening Toner", price: 35.0, image: productSerumBrightening, category: "Toner" },
+    
+    // Face Mask Category - 5 items
+    { id: 21, name: "Clay Mask", price: 45.0, image: productCreamMoisturizing, category: "Mask" },
+    { id: 22, name: "Sheet Mask Set", price: 28.0, image: productCreamNourishing, category: "Mask" },
+    { id: 23, name: "Sleeping Mask", price: 52.0, image: productCreamRecovery, category: "Mask" },
+    { id: 24, name: "Hydrating Mask", price: 48.0, image: productCreamSoothing, category: "Mask" },
+    { id: 25, name: "Detox Mask", price: 50.0, image: productCreamEye, category: "Mask" },
+    
+    // Sunscreen Category - 5 items
+    { id: 26, name: "Daily UV Shield SPF 50", price: 42.0, image: productCream, category: "Sunscreen" },
+    { id: 27, name: "Mineral Sunscreen SPF 45", price: 46.0, image: productCreamDay, category: "Sunscreen" },
+    { id: 28, name: "Tinted Sunscreen SPF 40", price: 48.0, image: productCreamFirming, category: "Sunscreen" },
+    { id: 29, name: "Waterproof Sunscreen SPF 50+", price: 44.0, image: productCreamMoisturizing, category: "Sunscreen" },
+    { id: 30, name: "Lightweight Sunscreen SPF 35", price: 40.0, image: productCreamNourishing, category: "Sunscreen" },
+    
+    // Eye Care Category - 5 items
+    { id: 31, name: "Eye Cream", price: 56.0, image: productCreamEye, category: "Eye Care" },
+    { id: 32, name: "Eye Serum", price: 62.0, image: productSerumPeptide, category: "Eye Care" },
+    { id: 33, name: "Eye Gel", price: 48.0, image: productSerumCollagen, category: "Eye Care" },
+    { id: 34, name: "Dark Circle Treatment", price: 58.0, image: productSerumBrightening, category: "Eye Care" },
+    { id: 35, name: "Eye Mask Patches", price: 32.0, image: productCreamSoothing, category: "Eye Care" },
+    
+    // Exfoliator Category - 5 items
+    { id: 36, name: "Gentle Scrub", price: 38.0, image: productCleanserExfoliating, category: "Exfoliator" },
+    { id: 37, name: "Chemical Exfoliant", price: 44.0, image: productCleanserPurifying, category: "Exfoliator" },
+    { id: 38, name: "Enzyme Peel", price: 52.0, image: productCleanserCream, category: "Exfoliator" },
+    { id: 39, name: "Peeling Gel", price: 40.0, image: productCleanserBalm, category: "Exfoliator" },
+    { id: 40, name: "AHA/BHA Toner", price: 46.0, image: productCleanserMousse, category: "Exfoliator" },
+    
+    // Essence Category - 5 items
+    { id: 41, name: "Hydrating Essence", price: 58.0, image: productSerumHyaluronic, category: "Essence" },
+    { id: 42, name: "Brightening Essence", price: 62.0, image: productSerumBrightening, category: "Essence" },
+    { id: 43, name: "Anti-Aging Essence", price: 68.0, image: productSerumAntiaging, category: "Essence" },
+    { id: 44, name: "Repair Essence", price: 64.0, image: productSerumRetinol, category: "Essence" },
+    { id: 45, name: "Soothing Essence", price: 56.0, image: productSerumVitaminE, category: "Essence" },
+    
+    // Mist Category - 5 items
+    { id: 46, name: "Refreshing Mist", price: 28.0, image: productSerum, category: "Mist" },
+    { id: 47, name: "Hydrating Mist", price: 32.0, image: productSerumHyaluronic, category: "Mist" },
+    { id: 48, name: "Calming Mist", price: 30.0, image: productSerumVitaminE, category: "Mist" },
+    { id: 49, name: "Setting Mist", price: 34.0, image: productSerumPeptide, category: "Mist" },
+    { id: 50, name: "Glow Mist", price: 36.0, image: productSerumBrightening, category: "Mist" },
   ];
 
-  const categories = ["All", "Serum", "Moisturizer", "Cleanser"];
+  const categories = ["All", "Serum", "Moisturizer", "Cleanser", "Toner", "Mask", "Sunscreen", "Eye Care", "Exfoliator", "Essence", "Mist"];
 
   const filteredProducts =
     selectedCategory === "All"
