@@ -1,7 +1,9 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Minus, Plus, ArrowLeft } from "lucide-react";
 import { useState } from "react";
+import { useCart } from "@/context/CartContext";
+import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import productSerum from "@/assets/product-serum.jpg";
@@ -34,7 +36,10 @@ import productCleanserMousse from "@/assets/product-cleanser-mousse.jpg";
 
 const ProductDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCart();
+  const { toast } = useToast();
 
   const products = [
     // Serum Category - 5 items
@@ -360,6 +365,23 @@ const ProductDetail = () => {
 
   const product = products.find((p) => p.id === Number(id)) || products[0];
 
+  const handleAddToCart = () => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      category: product.category,
+    }, quantity);
+    
+    toast({
+      title: "Added to cart!",
+      description: `${quantity} x ${product.name} added to your cart.`,
+    });
+    
+    setQuantity(1);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -438,7 +460,7 @@ const ProductDetail = () => {
               </div>
 
               {/* Add to Cart Button */}
-              <Button size="lg" className="w-full">
+              <Button size="lg" className="w-full" onClick={handleAddToCart} data-testid="button-add-to-cart">
                 Add to Cart
               </Button>
             </div>

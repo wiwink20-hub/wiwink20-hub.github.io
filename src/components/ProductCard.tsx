@@ -12,7 +12,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ id, name, price, image, category }: ProductCardProps) => {
   return (
-    <Card className="group overflow-hidden hover-lift border-border/50">
+    <Card className="group overflow-hidden hover-lift border-border/50" data-testid={`card-product-${id}`}>
       <Link to={`/product/${id}`}>
         <div className="aspect-square overflow-hidden bg-secondary/20">
           <img
@@ -25,11 +25,11 @@ const ProductCard = ({ id, name, price, image, category }: ProductCardProps) => 
           <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wider">
             {category}
           </p>
-          <h3 className="font-semibold text-foreground mb-2">{name}</h3>
+          <h3 className="font-semibold text-foreground mb-2" data-testid={`text-product-name-${id}`}>{name}</h3>
           <div className="flex justify-between items-center">
-            <span className="text-lg font-bold text-primary">${price.toFixed(2)}</span>
-            <Button variant="secondary" size="sm">
-              Add to Cart
+            <span className="text-lg font-bold text-primary" data-testid={`text-product-price-${id}`}>${price.toFixed(2)}</span>
+            <Button variant="secondary" size="sm" data-testid={`button-view-details-${id}`}>
+              View Details
             </Button>
           </div>
         </CardContent>

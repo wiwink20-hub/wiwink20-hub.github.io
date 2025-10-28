@@ -3,33 +3,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Trash2, Plus, Minus, ShoppingBag } from "lucide-react";
-import { useState } from "react";
-import productSerum from "@/assets/product-serum.jpg";
+import { useCart } from "@/context/CartContext";
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Radiance Serum",
-      price: 68.0,
-      image: productSerum,
-      quantity: 2,
-    },
-  ]);
-
-  const updateQuantity = (id: number, change: number) => {
-    setCartItems(
-      cartItems
-        .map((item) =>
-          item.id === id ? { ...item, quantity: Math.max(0, item.quantity + change) } : item
-        )
-        .filter((item) => item.quantity > 0)
-    );
-  };
-
-  const removeItem = (id: number) => {
-    setCartItems(cartItems.filter((item) => item.id !== id));
-  };
+  const { cartItems, updateQuantity, removeFromCart } = useCart();
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const shipping = subtotal > 0 ? 10 : 0;
@@ -62,14 +39,22 @@ const Cart = () => {
                   <div
                     key={item.id}
                     className="flex items-center gap-4 p-4 border border-border rounded-lg"
+                    data-testid={`cart-item-${item.id}`}
                   >
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-24 h-24 object-cover rounded-lg"
-                    />
+                    <Link to={`/product/${item.id}`}>
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-24 h-24 object-cover rounded-lg hover:opacity-80 transition-opacity cursor-pointer"
+                      />
+                    </Link>
                     <div className="flex-1">
-                      <h3 className="font-semibold mb-1">{item.name}</h3>
+                      <Link to={`/product/${item.id}`}>
+                        <h3 className="font-semibold mb-1 hover:text-primary transition-colors cursor-pointer">{item.name}</h3>
+                      </Link>
+                      {item.category && (
+                        <p className="text-xs text-muted-foreground mb-1">{item.category}</p>
+                      )}
                       <p className="text-primary font-bold">${item.price.toFixed(2)}</p>
                     </div>
 
@@ -78,14 +63,16 @@ const Cart = () => {
                         variant="ghost"
                         size="icon"
                         onClick={() => updateQuantity(item.id, -1)}
+                        data-testid={`button-decrease-${item.id}`}
                       >
                         <Minus className="h-4 w-4" />
                       </Button>
-                      <span className="px-4 py-2">{item.quantity}</span>
+                      <span className="px-4 py-2" data-testid={`text-quantity-${item.id}`}>{item.quantity}</span>
                       <Button
                         variant="ghost"
                         size="icon"
                         onClick={() => updateQuantity(item.id, 1)}
+                        data-testid={`button-increase-${item.id}`}
                       >
                         <Plus className="h-4 w-4" />
                       </Button>
@@ -95,7 +82,8 @@ const Cart = () => {
                       variant="ghost"
                       size="icon"
                       className="text-destructive"
-                      onClick={() => removeItem(item.id)}
+                      onClick={() => removeFromCart(item.id)}
+                      data-testid={`button-remove-${item.id}`}
                     >
                       <Trash2 className="h-5 w-5" />
                     </Button>
